@@ -12,7 +12,7 @@
 
 int main()
 {
-    char nomeArquivo[50];
+    char nomeArquivo[50] = "labirinto1.txt\0";
     int opcao;
     Cordenada *caminho = NULL;
 
@@ -45,11 +45,12 @@ int main()
         break;
 
     case 3:
-        printf("Método iterativo\n");
-        caminho = buscaIterativa(labirinto);
-
+        buscaIterativa(labirinto);
         break;
-    
+
+    case 4:
+        imprimirLabirinto(labirinto);
+        break;   
     default:
         break;
     }

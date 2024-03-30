@@ -6,16 +6,25 @@ typedef struct cordenada{
     int y;
 } Cordenada;
 
+
+
 char **lerLabirinto(FILE *arquivo){
 
-    char labirinto[10][10];
+    char temp;
+    char **labirinto = (char **) calloc(10, sizeof(char*));
+    for (int i = 0; i < 10; i++)
+    {
+        labirinto[i] = (char *) calloc(10 , sizeof(char));
+    }
+    
+    
     for (int i = 0; i < 10; i++)
     {
         for (int j = 0; j < 10; j++)
         {
-            labirinto[i][j] = fgetc(arquivo);
+            fgets(labirinto[i], 11, arquivo);
+            printf("%c", labirinto[i][j]);
         }
-        
     }
 
     return labirinto;   
@@ -59,3 +68,25 @@ Cordenada encontrarSaida(char **labirinto){
     return saida;
 }
 
+
+
+void imprimirCaminho(Cordenada *caminho, int movsFeitos){
+    for (int i = 0; i < movsFeitos; i++)
+    {
+        printf("%d,%d\n", caminho[i].x, 9 - caminho[i].y);
+    }
+    
+    
+}
+
+void imprimirLabirinto(char **labirinto){
+    for (int i = 0; i < 10; i++)
+    {
+        for (int j = 0; j < 10; j++)
+        {
+            printf("%c", labirinto[i][j]);
+        }
+        printf("\n");
+    }
+    
+}

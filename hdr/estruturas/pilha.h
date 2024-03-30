@@ -21,4 +21,6 @@ void inserirPilha(no **topo, no *novoNo);
  */
 no *removerPilha(no **topo);
 
+void invertePilha(no **topo);
+
 #endif // PILHA_H

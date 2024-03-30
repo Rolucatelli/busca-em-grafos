@@ -15,6 +15,7 @@ typedef struct cordenada
     int y;
 } Cordenada;
 
+
 /**
  * Função que lê um labirinto de um arquivo e retorna uma matriz 2D representando o labirinto.
  *
@@ -41,5 +42,11 @@ Cordenada encontrarEntrada(char **labirinto);
  * @return Uma Cordenada representando as coordenadas da saída.
  */
 Cordenada encontrarSaida(char **labirinto);
+
+
+
+void imprimirCaminho(Cordenada *caminho, int movsFeitos);
+
+void imprimirLabirinto(char **labirinto);
 
 #endif // LABIRINTO_H

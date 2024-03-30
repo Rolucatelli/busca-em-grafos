@@ -13,6 +13,7 @@ typedef struct no_
 {
     int chave;
     Cordenada cordenada;
+    int mov;
     struct no_ *prox;
 } no;
 
@@ -25,6 +26,6 @@ typedef struct no_
     * @return: ponteiro para o nó alocado.
     
 */
-no *alocarNo(int chave, Cordenada cordenada);
+no *alocarNo(int chave, Cordenada cordenada, int mov);
 
 #endif // NODE_H

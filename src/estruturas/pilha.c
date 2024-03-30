@@ -20,3 +20,12 @@ no *removerPilha(no **topo)
     }
     return NULL;
 }
+
+void invertePilha(no **topo){
+    no* tmp = NULL;
+    while (topo != NULL)
+    {
+        inserirPilha(&tmp, removerPilha(topo));
+    }
+    *topo = tmp;
+}
