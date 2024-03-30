@@ -6,28 +6,6 @@ typedef struct cordenada{
     int y;
 } Cordenada;
 
-// char **lerLabirinto(FILE *arquivo){
-
-//     char temp;
-//     char **labirinto = (char **) calloc(10, sizeof(char*));
-//     for (int i = 0; i < 10; i++)
-//     {
-//         labirinto[i] = (char *) calloc(10 , sizeof(char));
-//     }
-    
-    
-//     for (int i = 0; i < 10; i++)
-//     {
-//         for (int j = 0; j < 10; j++)
-//         {
-//             labirinto[i][j] = fgetc(arquivo);
-//         }
-        
-//     }
-
-    
-//     return labirinto;   
-// }
 
 char **alocarLabirinto(){
     char **labirinto = (char **)malloc(10 * sizeof(char *));
@@ -51,11 +29,12 @@ char **lerLabirinto(FILE* arquivo){
     char temp;
     for (int i = 0; i < 10; i++)
     {
-        for (int j = 0; j < 11; j++)
+        for (int j = 0; j < 10; j++)
         {
             fscanf(arquivo, "%c", &temp);
             if(temp == '\n'){
                 fscanf(arquivo, "%c", &temp);
+                j--;
             }
             labirinto[i][j] = temp;
         }
@@ -107,7 +86,7 @@ Cordenada encontrarSaida(char **labirinto){
 void imprimirCaminho(Cordenada *caminho, int movsFeitos){
     for (int i = 0; i < movsFeitos; i++)
     {
-        printf("%d,%d\n", caminho[i].x, 9 - caminho[i].y);
+        printf("%d,%d\n", caminho[i].y, 9 - caminho[i].x);
     }
     
     

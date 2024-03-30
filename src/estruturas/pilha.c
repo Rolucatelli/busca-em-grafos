@@ -23,9 +23,16 @@ no *removerPilha(no **topo)
 
 void invertePilha(no **topo){
     no* tmp = NULL;
-    while (topo != NULL)
+    while (*topo != NULL)
     {
         inserirPilha(&tmp, removerPilha(topo));
     }
     *topo = tmp;
+}
+
+void desalocarPilha(no **topo){
+    while (*topo != NULL)
+    {
+        free(removerPilha(topo));
+    }
 }

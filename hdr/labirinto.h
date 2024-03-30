@@ -66,10 +66,19 @@ Cordenada encontrarEntrada(char **labirinto);
  */
 Cordenada encontrarSaida(char **labirinto);
 
-
-
+/**
+ * Função que imprime o caminho percorrido pelo jogador.
+ *
+ * @param caminho Um vetor de cordenadas representando o caminho percorrido.
+ * @param movsFeitos O número de movimentos feitos.
+ */
 void imprimirCaminho(Cordenada *caminho, int movsFeitos);
 
+/**
+ * Função que imprime o labirinto.
+ *
+ * @param labirinto A matriz 2D representando o labirinto.
+ */
 void imprimirLabirinto(char **labirinto);
 
 #endif // LABIRINTO_H

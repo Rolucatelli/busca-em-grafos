@@ -4,11 +4,14 @@
 #include "../labirinto.h"
 
 /*
-    * Estrutura que representa um nó de uma lista encadeada.
-    * chave: valor armazenado no nó.
-    * cordenada: cordenada armazenada no nó.
-    * prox: ponteiro para o próximo nó da lista.
-*/
+ * Estrutura que representa um nó
+ *
+ * @field chave: valor armazenado no nó.
+ * @field cordenada: cordenada armazenada no nó.
+ * @field mov: movimento feito para chegar no nó.
+ * @field prox: ponteiro para o próximo nó.
+ *
+ */
 typedef struct no_
 {
     int chave;
@@ -18,14 +21,13 @@ typedef struct no_
 } no;
 
 /*
-    * Aloca um novo nó e inicializa seus campos.
-    * 
-    * @param chave: valor a ser armazenado no nó.
-    * @param cordenada: cordenada a ser armazenada no nó.
-    * 
-    * @return: ponteiro para o nó alocado.
-    
-*/
+ * Aloca um novo nó e inicializa seus campos.
+ *
+ * @param chave: valor a ser armazenado no nó.
+ * @param cordenada: cordenada a ser armazenada no nó.
+ *
+ * @return: ponteiro para o nó alocado.
+ */
 no *alocarNo(int chave, Cordenada cordenada, int mov);
 
 #endif // NODE_H

@@ -21,6 +21,18 @@ void inserirPilha(no **topo, no *novoNo);
  */
 no *removerPilha(no **topo);
 
+/**
+ * Função que inverte a pilha.
+ *
+ * @param topo: ponteiro para o topo da pilha.
+ */
 void invertePilha(no **topo);
+
+/**
+ * Função que desaloca a pilha.
+ *
+ * @param topo: ponteiro para o topo da pilha.
+ */
+void desalocarPilha(no **topo);
 
 #endif // PILHA_H

@@ -9,6 +9,7 @@ void buscaIterativa(char **labirinto)
     no *topo = NULL;
     Cordenada entrada = encontrarEntrada(labirinto);
     Cordenada saida = encontrarSaida(labirinto);
+
     Cordenada *caminho = (Cordenada *)malloc(100 * sizeof(Cordenada));
     Cordenada player = entrada;
     int mov = 0, movsFeitos = 1;
@@ -23,7 +24,7 @@ void buscaIterativa(char **labirinto)
                 int novoY = player.y + movsPossiveis[mov].y;
                 if (movValido(labirinto, novoX, novoY))
                 {
-                    andar(&player, mov);
+                    andar(labirinto, &player, mov);
                     inserirPilha(&topo, alocarNo(movsFeitos++, player, mov));
                     mov = 0;
                     break;
@@ -36,14 +37,18 @@ void buscaIterativa(char **labirinto)
             no *temp = removerPilha(&topo);
             if (temp != NULL)
             {
-                mov = temp->mov;
-                player.x -= movsPossiveis[mov].x;
-                player.y -= movsPossiveis[mov].y;
+                mov = temp->mov + 1;
+                player.x -= movsPossiveis[temp->mov].x;
+                player.y -= movsPossiveis[temp->mov].y;
+                movsFeitos--;
+
+                free(temp);
             }
         }
     }
 
     invertePilha(&topo);
+    inserirPilha(&topo, alocarNo(movsFeitos, entrada, mov));
     int i = 0;
     while (topo != NULL)
     {
@@ -51,11 +56,13 @@ void buscaIterativa(char **labirinto)
     }
 
     imprimirCaminho(caminho, movsFeitos);
+    desalocarPilha(&topo);
 }
 
-void andar(Cordenada *player, int mov)
+void andar(char **labirinto, Cordenada *player, int mov)
 {
     Cordenada movsPossiveis[4] = {{0, 1}, {1, 0}, {0, -1}, {-1, 0}};
+    labirinto[player->x][player->y] = '1';
     player->x += movsPossiveis[mov].x;
     player->y += movsPossiveis[mov].y;
 }
@@ -67,7 +74,7 @@ int estaNaSaida(Cordenada player, Cordenada saida)
 
 int movValido(char **labirinto, int x, int y)
 {
-    return (x >= 0 && y >= 0 && x <= 10 && y <= 10 && labirinto[x][y] == '0') ? 1 : 0;
+    return (x >= 0 && y >= 0 && x < 10 && y < 10 && (labirinto[x][y] == '0' || labirinto[x][y] == 'S')) ? 1 : 0;
 }
 
 int daPraAndar(char **labirinto, Cordenada player, int mov)
@@ -87,14 +94,3 @@ int daPraAndar(char **labirinto, Cordenada player, int mov)
 
     return 0;
 }
-/*
-    Enqunato player não chegar a saida
-        Se tiver movimentos possiveis
-            faz um movimento
-            verifica se é possível
-            empilha movimento
-        senão
-            desempilha movimento
-
-
-*/

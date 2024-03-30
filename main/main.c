@@ -1,9 +1,23 @@
+/*
+    +-------------------------------------------------------------+
+    | UNIFAL – Universidade Federal de Alfenas.                   |
+    | BACHARELADO EM CIENCIA DA COMPUTACAO.                       |
+    | Trabalho..: Busca em Grafos                                 |
+    | Disciplina: Algoritmos e Estrutura de Dados III             |
+    | Professor.: Iago Augusto de Carvalho                        |
+    | Aluno(s)..: Rodrigo Luís Gasparino Lucatelli                |
+    |             José Olavo Monteiro Travassos Pereira da Silva  |
+    |             João Felipe Martins Santana                     |
+    |             Leonardo Bonardi Marques Silva                  |
+    |                                                             |
+    |                                                             |
+    | Data......: 02/04/2024                                      |
+    +-------------------------------------------------------------+
+*/
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
-// Modelo para fazer o include:      #include "../hdr/arquivo.h"
-#include "../hdr/arquivo.h"
 #include "../hdr/labirinto.h"
 #include "../hdr/estruturas/pilha.h"
 #include "../hdr/algoritimos/buscaLargura.h"
@@ -12,47 +26,65 @@
 
 int main()
 {
-    char nomeArquivo[50] = "labirinto1.txt\0";
+    char nomeArquivo[50];
     int opcao;
     Cordenada *caminho = NULL;
 
     printf("Coloque o arquivo do labirinto na pasta 'labirintos' e digite o nome do arquivo e sua extensão (não precisa incluir o caminho):\n");
     scanf("%s", nomeArquivo);
 
-    FILE *arquivo = lerArquivo(nomeArquivo);
+    FILE *arquivo = fopen(nomeArquivo, "r");
+    while (arquivo == NULL)
+    {
+        printf("Arquivo não encontrado, tente novamente:\n");
+        scanf("%s", nomeArquivo);
+        arquivo = fopen(nomeArquivo, "r");
+    }
+
     char **labirinto = lerLabirinto(arquivo);
     fclose(arquivo);
-
-    printf("Qual a estratégia que deseja utilizar para encontrar a saída do labirinto?\n");
-    printf("1 - Busca em largura\n");
-    printf("2 - Busca em profundidade\n");
-    printf("3 - Método iterativo\n");
-
-    scanf("%d", &opcao);
-
-    switch (opcao)
+    system("clear");
+    do
     {
-    case 1:
-        printf("Busca em largura\n");
-        caminho = buscaLargura(labirinto);
+        printf("Qual a estratégia que deseja utilizar para encontrar a saída do labirinto?\n");
+        printf("0 - *cancelar* \n");
+        printf("1 - Busca em largura\n");
+        printf("2 - Busca em profundidade\n");
+        printf("3 - Método iterativo\n");
 
-        break;
+        scanf("%d", &opcao);
 
-    case 2:
-        printf("Busca em profundidade\n");
-        caminho = buscaProdundidade(labirinto);
+        switch (opcao)
+        {
+        case 0:
+            break;
+        case 1:
+            printf("Busca em largura\n");
+            caminho = buscaLargura(labirinto);
 
-        break;
+            break;
 
-    case 3:
-        buscaIterativa(labirinto);
-        break;
+        case 2:
+            printf("Busca em profundidade\n");
+            caminho = buscaProdundidade(labirinto);
 
-    case 4:
-        imprimirLabirinto(labirinto);
-        break;   
-    default:
-        break;
-    }
+            break;
+
+        case 3:
+            system("clear");
+            buscaIterativa(labirinto);
+            opcao = 0;
+            break;
+
+        case 4:
+            imprimirLabirinto(labirinto);
+            break;
+        default:
+            system("clear");
+            printf("Opção inválida\n");
+            break;
+        }
+    } while (opcao != 0);
+
     return 0;
 }
