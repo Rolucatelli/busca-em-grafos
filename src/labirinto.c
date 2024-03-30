@@ -6,29 +6,63 @@ typedef struct cordenada{
     int y;
 } Cordenada;
 
+// char **lerLabirinto(FILE *arquivo){
 
+//     char temp;
+//     char **labirinto = (char **) calloc(10, sizeof(char*));
+//     for (int i = 0; i < 10; i++)
+//     {
+//         labirinto[i] = (char *) calloc(10 , sizeof(char));
+//     }
+    
+    
+//     for (int i = 0; i < 10; i++)
+//     {
+//         for (int j = 0; j < 10; j++)
+//         {
+//             labirinto[i][j] = fgetc(arquivo);
+//         }
+        
+//     }
 
-char **lerLabirinto(FILE *arquivo){
+    
+//     return labirinto;   
+// }
 
-    char temp;
-    char **labirinto = (char **) calloc(10, sizeof(char*));
+char **alocarLabirinto(){
+    char **labirinto = (char **)malloc(10 * sizeof(char *));
     for (int i = 0; i < 10; i++)
     {
-        labirinto[i] = (char *) calloc(10 , sizeof(char));
+        labirinto[i] = (char *)malloc(10 * sizeof(char));
     }
-    
-    
+    return labirinto;
+}
+
+void desalocarLabirinto(char **labirinto){
     for (int i = 0; i < 10; i++)
     {
-        for (int j = 0; j < 10; j++)
+        free(labirinto[i]);
+    }
+    free(labirinto);
+}
+
+char **lerLabirinto(FILE* arquivo){
+    char **labirinto = alocarLabirinto();
+    char temp;
+    for (int i = 0; i < 10; i++)
+    {
+        for (int j = 0; j < 11; j++)
         {
-            fgets(labirinto[i], 11, arquivo);
-            printf("%c", labirinto[i][j]);
+            fscanf(arquivo, "%c", &temp);
+            if(temp == '\n'){
+                fscanf(arquivo, "%c", &temp);
+            }
+            labirinto[i][j] = temp;
         }
     }
-
-    return labirinto;   
+    return labirinto;
 }
+    
 
 Cordenada encontrarEntrada(char **labirinto){
     Cordenada entrada;

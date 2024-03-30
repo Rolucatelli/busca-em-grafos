@@ -23,6 +23,29 @@ typedef struct cordenada
  * 
  * @return Uma matriz 2D representando o labirinto.
  */
+// char **lerLabirinto(FILE *arquivo);
+
+/**
+ * Função que aloca uma matriz 2D para representar um labirinto.
+ * 
+ * @return Uma matriz 2D representando o labirinto.
+ */
+char **alocarLabirinto();
+
+/**
+ * Função que desaloca uma matriz 2D representando um labirinto.
+ *
+ * @param labirinto A matriz 2D representando o labirinto.
+ */
+void desalocarLabirinto(char **labirinto);
+
+/**
+ * Função que lê um labirinto de um arquivo e retorna uma matriz 2D representando o labirinto.
+ *
+ * @param arquivo O arquivo do qual o labirinto é lido.
+ * 
+ * @return Uma matriz 2D representando o labirinto.
+ */
 char **lerLabirinto(FILE *arquivo);
 
 /**
