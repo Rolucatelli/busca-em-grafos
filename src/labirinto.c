@@ -1,8 +1,6 @@
 #include <stdio.h> 
 #include <stdlib.h>
 
-
-
 typedef struct Coordenada{
     int x;
     int y;
@@ -40,11 +38,9 @@ char **lerLabirinto(FILE* arquivo){
             }
             labirinto[i][j] = temp;
         }
-        labirinto[i][10] = '\0';
     }
     return labirinto;
 }
-    
 
 Coordenada encontrarEntrada(char **labirinto){
     Coordenada entrada;
@@ -83,8 +79,6 @@ Coordenada encontrarSaida(char **labirinto){
     }
     return saida;
 }
-
-
 
 void imprimirCaminho(Coordenada *caminho, int movsFeitos){
     for (int i = 0; i < movsFeitos; i++)

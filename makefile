@@ -42,11 +42,8 @@ $(DEBUG_NAME): $(OBJ)
 $(PROJ_NAME): $(OBJ)
 	@ echo 'Construindo o binário usando o linker GCC: $@'
 	$(CC) $^ -o ./exe/$@
-	@ echo 'Binário pronto!: $@'
+	@ echo 'Binário pronto: $@'
 	@ echo ' '
-
-
-
 
 ./objects/%.o: ./src/%.c ./hdr/%.h
 	@ echo 'Construindo target usando o compilador GCC: $<'
@@ -67,10 +64,6 @@ $(PROJ_NAME): $(OBJ)
 	@ echo 'Construindo target usando o compilador GCC: $<'
 	$(CC) $< $(CC_FLAGS) -o $@
 	@ echo ' '
-
-
-
-
 
 objFolder:
 	@ mkdir -p objects ./objects/algoritmos ./objects/estruturas

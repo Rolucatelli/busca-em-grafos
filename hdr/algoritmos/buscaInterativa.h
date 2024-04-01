@@ -7,11 +7,7 @@
     utilizando o algoritmo de busca iterativa
 
     @param labirinto matriz de caracteres representando o labirinto
-    
-
 */
 void buscaIterativa(char **labirinto);
-
-
 
 #endif // BUSCAITERATIVA_H

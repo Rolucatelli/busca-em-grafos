@@ -18,15 +18,19 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "../hdr/algoritmos/iterativo.h"
+#include "../hdr/algoritmos/buscaInterativa.h"
 #include "../hdr/algoritmos/buscaLargura.h"
+#include "../hdr/labirinto.h"
 
 int main()
 {
     char nomeArquivo[50], caminho[50] = "./exe/labirintos/";
     int opcao;
+    printf("\033[0;31m");
 
-    printf("Coloque o arquivo do labirinto na pasta 'labirintos' e digite o nome do arquivo e sua extensão (não precisa incluir o caminho):\n");
+
+
+    printf("\033[0;31mColoque os arquivos dos labirintos em ./exe/labirintos/ \033[0me digite o nome do arquivo e sua extensão:\nNome do arquivo: ");
     scanf("%s", nomeArquivo);
     strcat(caminho, nomeArquivo);
     FILE *arquivo = fopen(caminho, "r");
@@ -46,17 +50,15 @@ int main()
     system("clear");
     do
     {
-        printf("Qual a estratégia que deseja utilizar para encontrar a saída do labirinto?\n");
-        printf("0 - *cancelar* \n");
+        printf("Qual a algoritmo você deseja utilizar?\n");
         printf("1 - Busca em largura\n");
         printf("2 - Busca em profundidade\n");
+        printf("opção: ");
 
         scanf("%d", &opcao);
 
         switch (opcao)
         {
-        case 0:
-            break;
         case 1:
             system("clear");
             buscaLargura(labirinto);
@@ -67,11 +69,6 @@ int main()
             buscaIterativa(labirinto);
             opcao = 0;
             break;
-        case 3:
-            system("clear");
-            imprimirLabirinto(labirinto);
-            break;
-        
         default:
             system("clear");
             printf("Opção inválida\n");
@@ -79,6 +76,5 @@ int main()
         }
     } while (opcao != 0);
 
-    desalocarLabirinto(labirinto);
     return 0;
 }
