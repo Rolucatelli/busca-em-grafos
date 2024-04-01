@@ -7,10 +7,10 @@ PROJ_NAME=busca_em_grafos
 DEBUG_NAME=busca_em_grafos_debug
 
 # Arquivos .c
-C_SOURCE=$(wildcard ./src/*.c) $(wildcard ./src/algoritimos/*.c) $(wildcard ./src/estruturas/*.c)
+C_SOURCE=$(wildcard ./src/*.c) $(wildcard ./src/algoritmos/*.c) $(wildcard ./src/estruturas/*.c)
 
 # Arquivos .h
-H_SOURCE=$(wildcard ./hdr/*.h) $(wildcard ./hdr/algoritimos/*.h) $(wildcard ./hdr/estruturas/*.h)
+H_SOURCE=$(wildcard ./hdr/*.h) $(wildcard ./hdr/algoritmos/*.h) $(wildcard ./hdr/estruturas/*.h)
 
 # Arquivos objeto
 OBJ=$(subst .c,.o,$(subst src,objects,$(C_SOURCE) ./objects/main.c))
@@ -53,7 +53,7 @@ $(PROJ_NAME): $(OBJ)
 	$(CC) $< $(CC_FLAGS) -o $@
 	@ echo ' '
 
-./objects/algoritimos/%.o: ./src/algoritimos/%.c ./hdr/algoritimos/%.h
+./objects/algoritmos/%.o: ./src/algoritmos/%.c ./hdr/algoritmos/%.h
 	@ echo 'Construindo target usando o compilador GCC: $<'
 	$(CC) $< $(CC_FLAGS) -o $@
 	@ echo ' '
@@ -73,7 +73,7 @@ $(PROJ_NAME): $(OBJ)
 
 
 objFolder:
-	@ mkdir -p objects ./objects/algoritimos ./objects/estruturas
+	@ mkdir -p objects ./objects/algoritmos ./objects/estruturas
 
 exeFolder:
 	@ mkdir -p exe ./exe/labirintos

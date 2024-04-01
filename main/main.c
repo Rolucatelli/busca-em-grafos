@@ -18,8 +18,8 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "../hdr/algoritimos/iterativo.h"
-#include "../hdr/algoritimos/buscaLargura.h"
+#include "../hdr/algoritmos/iterativo.h"
+#include "../hdr/algoritmos/buscaLargura.h"
 
 int main()
 {
@@ -67,6 +67,11 @@ int main()
             buscaIterativa(labirinto);
             opcao = 0;
             break;
+        case 3:
+            system("clear");
+            imprimirLabirinto(labirinto);
+            break;
+        
         default:
             system("clear");
             printf("Opção inválida\n");

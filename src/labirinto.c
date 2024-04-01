@@ -37,10 +37,11 @@ char **lerLabirinto(FILE* arquivo){
             fscanf(arquivo, "%c", &temp);
             if(temp == '\n'){
                 fscanf(arquivo, "%c", &temp);
-                j--;
+                // j--;
             }
             labirinto[i][j] = temp;
         }
+        labirinto[i][10] = '\0';
     }
     return labirinto;
 }
