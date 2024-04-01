@@ -23,18 +23,22 @@
 
 int main()
 {
-    char nomeArquivo[50];
+    char nomeArquivo[50], caminho[50] = "./exe/labirintos/";
     int opcao;
 
     printf("Coloque o arquivo do labirinto na pasta 'labirintos' e digite o nome do arquivo e sua extensão (não precisa incluir o caminho):\n");
     scanf("%s", nomeArquivo);
-
-    FILE *arquivo = fopen(nomeArquivo, "r");
+    strcat(caminho, nomeArquivo);
+    FILE *arquivo = fopen(caminho, "r");
     while (arquivo == NULL)
     {
+        caminho[0] = '\0';
+        strcat(caminho, "./exe/labirintos/");
         printf("Arquivo não encontrado, tente novamente:\n");
         scanf("%s", nomeArquivo);
-        arquivo = fopen(nomeArquivo, "r");
+        strcat(caminho, nomeArquivo);
+
+        arquivo = fopen(caminho, "r");
     }
 
     char **labirinto = lerLabirinto(arquivo);
