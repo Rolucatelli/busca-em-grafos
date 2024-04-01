@@ -3,7 +3,6 @@
 #include "../../hdr/labirinto.h"
 #include "../../hdr/estruturas/node.h"
 
-
 void buscarLista(no *ptlista, int x, no **ant, no **pont)
 {
     *pont = NULL;
@@ -27,24 +26,6 @@ void buscarLista(no *ptlista, int x, no **ant, no **pont)
         }
     }
 }
-
-// void busca1(no *ptlista, int x, no **ant, no **pont){
-//     *ant = ptlista;
-//     *pont = NULL;
-
-//     while (*pont == NULL)
-//     {
-//         if ((*ant)->chave == x)
-//         {
-//             *pont = *ant;
-//             break;
-//         }else{
-//             *ant = (*ant)->prox;
-//         }
-
-//     }
-
-// }
 
 no *inserirLista(no *ptlista, no *novo_no)
 {
@@ -71,5 +52,39 @@ no *removerLista(no *ptlista, int x)
     else
     {
         return NULL;
+    }
+}
+
+no *buscarPai(no *ptlista, Coordenada filho, int mov)
+{
+    Coordenada movsPossiveis[4] = {{0, 1}, {1, 0}, {0, -1}, {-1, 0}};
+
+    mov = (mov < 2) ? mov + 2 : mov - 2;
+    Coordenada pai = filho;
+    pai.x += movsPossiveis[mov].x;
+    pai.y += movsPossiveis[mov].y;
+
+    while (ptlista->prox != NULL && !estaNaSaida(ptlista->prox->Coordenada, pai))
+    {
+        ptlista = ptlista->prox;
+    }
+    if (ptlista->prox != NULL)
+    {
+        return ptlista->prox;
+    }
+    else
+    {
+        return NULL;
+    }
+}
+
+void desalocarLista(no *ptlista)
+{
+    no *tmp;
+    while (ptlista != NULL)
+    {
+        tmp = ptlista;
+        ptlista = ptlista->prox;
+        free(tmp);
     }
 }

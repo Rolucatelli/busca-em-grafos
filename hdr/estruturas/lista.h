@@ -36,4 +36,25 @@ no *inserirLista(no *ptlista, no *novo_no);
  */
 no *removerLista(no *ptlista, int x);
 
+
+/*
+ * Função que retorna o nó pai de um nó filho.
+ *
+ * @param ptlista: ponteiro para a lista.
+ * @param filho: coordenada do nó filho.
+ * @param mov: movimento feito para chegar no nó filho.
+ *
+ * @return no *: ponteiro para o nó pai.
+ */
+no *buscarPai(no *ptlista, Coordenada filho, int mov);
+
+/*
+ * Função que desaloca a lista.
+ *
+ * @param ptlista: ponteiro para a lista.
+ *
+ * @return void.
+ */
+void desalocarLista(no *ptlista);
+
 #endif // LISTA_H

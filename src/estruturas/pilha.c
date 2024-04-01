@@ -3,7 +3,6 @@
 #include "../../hdr/labirinto.h"
 #include "../../hdr/estruturas/node.h"
 
-
 void inserirPilha(no **topo, no *novoNo)
 {
     novoNo->prox = *topo;
@@ -21,8 +20,9 @@ no *removerPilha(no **topo)
     return NULL;
 }
 
-void invertePilha(no **topo){
-    no* tmp = NULL;
+void invertePilha(no **topo)
+{
+    no *tmp = NULL;
     while (*topo != NULL)
     {
         inserirPilha(&tmp, removerPilha(topo));
@@ -30,7 +30,8 @@ void invertePilha(no **topo){
     *topo = tmp;
 }
 
-void desalocarPilha(no **topo){
+void desalocarPilha(no **topo)
+{
     while (*topo != NULL)
     {
         free(removerPilha(topo));

@@ -3,10 +3,6 @@
 #include "../../hdr/labirinto.h"
 #include "../../hdr/estruturas/node.h"
 
-/*
-    f: quem tá a mais tempo na fila
-    r: quem acabou de chegar na fila
-*/
 void inserirFila(no **f, no **r, no *novoNo)
 {
     if (*r == NULL)
@@ -35,3 +31,13 @@ no *removerFila(no **f, no **r)
     return retorno;
 }
 
+void desalocarFila(no **f)
+{
+    no *temp;
+    while (*f != NULL)
+    {
+        temp = *f;
+        *f = (*f)->prox;
+        free(temp);
+    }
+}

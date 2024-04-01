@@ -7,7 +7,7 @@
  * Estrutura que representa um nó
  *
  * @field chave: valor armazenado no nó.
- * @field cordenada: cordenada armazenada no nó.
+ * @field Coordenada: Coordenada armazenada no nó.
  * @field mov: movimento feito para chegar no nó.
  * @field prox: ponteiro para o próximo nó.
  *
@@ -15,7 +15,7 @@
 typedef struct no_
 {
     int chave;
-    Cordenada cordenada;
+    Coordenada Coordenada;
     int mov;
     struct no_ *prox;
 } no;
@@ -24,10 +24,11 @@ typedef struct no_
  * Aloca um novo nó e inicializa seus campos.
  *
  * @param chave: valor a ser armazenado no nó.
- * @param cordenada: cordenada a ser armazenada no nó.
+ * @param Coordenada: Coordenada a ser armazenada no nó.
+ * @param mov: movimento feito para chegar no nó.
  *
  * @return: ponteiro para o nó alocado.
  */
-no *alocarNo(int chave, Cordenada cordenada, int mov);
+no *alocarNo(int chave, Coordenada Coordenada, int mov);
 
 #endif // NODE_H

@@ -5,13 +5,13 @@
 
 void buscaIterativa(char **labirinto)
 {
-    Cordenada movsPossiveis[4] = {{0, 1}, {1, 0}, {0, -1}, {-1, 0}};
+    Coordenada movsPossiveis[4] = {{0, 1}, {1, 0}, {0, -1}, {-1, 0}};
     no *topo = NULL;
-    Cordenada entrada = encontrarEntrada(labirinto);
-    Cordenada saida = encontrarSaida(labirinto);
+    Coordenada entrada = encontrarEntrada(labirinto);
+    Coordenada saida = encontrarSaida(labirinto);
 
-    Cordenada *caminho = (Cordenada *)malloc(100 * sizeof(Cordenada));
-    Cordenada player = entrada;
+    Coordenada *caminho = (Coordenada *)malloc(100 * sizeof(Coordenada));
+    Coordenada player = entrada;
     int mov = 0, movsFeitos = 1;
 
     while (!estaNaSaida(player, saida))
@@ -24,7 +24,7 @@ void buscaIterativa(char **labirinto)
                 int novoY = player.y + movsPossiveis[mov].y;
                 if (movValido(labirinto, novoX, novoY))
                 {
-                    andar(labirinto, &player, mov);
+                    player = andar(labirinto, player, mov);
                     inserirPilha(&topo, alocarNo(movsFeitos++, player, mov));
                     mov = 0;
                     break;
@@ -52,45 +52,10 @@ void buscaIterativa(char **labirinto)
     int i = 0;
     while (topo != NULL)
     {
-        caminho[i++] = removerPilha(&topo)->cordenada;
+        caminho[i++] = removerPilha(&topo)->Coordenada;
     }
 
     imprimirCaminho(caminho, movsFeitos);
     desalocarPilha(&topo);
-}
-
-void andar(char **labirinto, Cordenada *player, int mov)
-{
-    Cordenada movsPossiveis[4] = {{0, 1}, {1, 0}, {0, -1}, {-1, 0}};
-    labirinto[player->x][player->y] = '1';
-    player->x += movsPossiveis[mov].x;
-    player->y += movsPossiveis[mov].y;
-}
-
-int estaNaSaida(Cordenada player, Cordenada saida)
-{
-    return (player.x == saida.x && player.y == saida.y) ? 1 : 0;
-}
-
-int movValido(char **labirinto, int x, int y)
-{
-    return (x >= 0 && y >= 0 && x < 10 && y < 10 && (labirinto[x][y] == '0' || labirinto[x][y] == 'S')) ? 1 : 0;
-}
-
-int daPraAndar(char **labirinto, Cordenada player, int mov)
-{
-    Cordenada movsPossiveis[4] = {{0, 1}, {1, 0}, {0, -1}, {-1, 0}};
-    while (mov < 4)
-    {
-        int novoX = player.x + movsPossiveis[mov].x;
-        int novoY = player.y + movsPossiveis[mov].y;
-
-        if (movValido(labirinto, novoX, novoY))
-        {
-            return 1;
-        }
-        mov++;
-    }
-
-    return 0;
+    free(caminho);
 }

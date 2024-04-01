@@ -5,19 +5,17 @@
 typedef struct no_
 {
     int chave;
-    Cordenada cordenada;
+    Coordenada Coordenada;
     int mov;
     struct no_ *prox;
 } no;
 
-no *alocarNo(int chave, Cordenada cordenada, int mov)
+no *alocarNo(int chave, Coordenada Coordenada, int mov)
 {
     no *retorno = malloc(sizeof(no));
     retorno->chave = chave;
-    retorno->cordenada = cordenada;
+    retorno->Coordenada = Coordenada;
     retorno->mov = mov;
     retorno->prox = NULL;
     return retorno;
 }
-
-

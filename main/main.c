@@ -9,8 +9,8 @@
     |             José Olavo Monteiro Travassos Pereira da Silva  |
     |             João Felipe Martins Santana                     |
     |             Leonardo Bonardi Marques Silva                  |
-    |                                                             |
-    |                                                             |
+    |             Vinícius Henrique Piotto Boiago                 |
+    |             Pedro Henrique de Almeida                       |
     | Data......: 02/04/2024                                      |
     +-------------------------------------------------------------+
 */
@@ -18,17 +18,13 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "../hdr/labirinto.h"
-#include "../hdr/estruturas/pilha.h"
-#include "../hdr/algoritimos/buscaLargura.h"
-#include "../hdr/algoritimos/buscaProfundidade.h"
 #include "../hdr/algoritimos/iterativo.h"
+#include "../hdr/algoritimos/buscaLargura.h"
 
 int main()
 {
     char nomeArquivo[50];
     int opcao;
-    Cordenada *caminho = NULL;
 
     printf("Coloque o arquivo do labirinto na pasta 'labirintos' e digite o nome do arquivo e sua extensão (não precisa incluir o caminho):\n");
     scanf("%s", nomeArquivo);
@@ -50,7 +46,6 @@ int main()
         printf("0 - *cancelar* \n");
         printf("1 - Busca em largura\n");
         printf("2 - Busca em profundidade\n");
-        printf("3 - Método iterativo\n");
 
         scanf("%d", &opcao);
 
@@ -59,25 +54,14 @@ int main()
         case 0:
             break;
         case 1:
-            printf("Busca em largura\n");
-            caminho = buscaLargura(labirinto);
-
+            system("clear");
+            buscaLargura(labirinto);
+            opcao = 0;
             break;
-
         case 2:
-            printf("Busca em profundidade\n");
-            caminho = buscaProdundidade(labirinto);
-
-            break;
-
-        case 3:
             system("clear");
             buscaIterativa(labirinto);
             opcao = 0;
-            break;
-
-        case 4:
-            imprimirLabirinto(labirinto);
             break;
         default:
             system("clear");

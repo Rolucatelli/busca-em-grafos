@@ -1,11 +1,14 @@
 #include <stdio.h> 
 #include <stdlib.h>
 
-typedef struct cordenada{
+
+
+typedef struct Coordenada{
     int x;
     int y;
-} Cordenada;
+} Coordenada;
 
+Coordenada movsPossiveis[4] = {{0, 1}, {1, 0}, {0, -1}, {-1, 0}};
 
 char **alocarLabirinto(){
     char **labirinto = (char **)malloc(10 * sizeof(char *));
@@ -43,8 +46,8 @@ char **lerLabirinto(FILE* arquivo){
 }
     
 
-Cordenada encontrarEntrada(char **labirinto){
-    Cordenada entrada;
+Coordenada encontrarEntrada(char **labirinto){
+    Coordenada entrada;
     entrada.x = -1;
     entrada.y = -1;
     for (int i = 0; i < 10; i++)
@@ -62,8 +65,8 @@ Cordenada encontrarEntrada(char **labirinto){
     return entrada;
 }
 
-Cordenada encontrarSaida(char **labirinto){
-    Cordenada saida;
+Coordenada encontrarSaida(char **labirinto){
+    Coordenada saida;
     saida.x = -1;
     saida.y = -1;
     for (int i = 0; i < 10; i++)
@@ -83,7 +86,7 @@ Cordenada encontrarSaida(char **labirinto){
 
 
 
-void imprimirCaminho(Cordenada *caminho, int movsFeitos){
+void imprimirCaminho(Coordenada *caminho, int movsFeitos){
     for (int i = 0; i < movsFeitos; i++)
     {
         printf("%d,%d\n", caminho[i].y, 9 - caminho[i].x);
@@ -102,4 +105,41 @@ void imprimirLabirinto(char **labirinto){
         printf("\n");
     }
     
+}
+
+Coordenada andar(char **labirinto, Coordenada player, int mov)
+{
+    
+    labirinto[player.x][player.y] = '1';
+    player.x += movsPossiveis[mov].x;
+    player.y += movsPossiveis[mov].y;
+    return player;
+}
+
+int estaNaSaida(Coordenada player, Coordenada saida)
+{
+    return (player.x == saida.x && player.y == saida.y) ? 1 : 0;
+}
+
+int movValido(char **labirinto, int x, int y)
+{
+    return (x >= 0 && y >= 0 && x < 10 && y < 10 && (labirinto[x][y] == '0' || labirinto[x][y] == 'S')) ? 1 : 0;
+}
+
+int daPraAndar(char **labirinto, Coordenada player, int mov)
+{
+
+    while (mov < 4)
+    {
+        int novoX = player.x + movsPossiveis[mov].x;
+        int novoY = player.y + movsPossiveis[mov].y;
+
+        if (movValido(labirinto, novoX, novoY))
+        {
+            return 1;
+        }
+        mov++;
+    }
+
+    return 0;
 }
